@@ -25,35 +25,28 @@ void resolver() {
     double r = c*c/c1/c1;
     
     
-    double malla[100][3];
+    double malla[101][3];
     
-    for(int i=0; i<100; i++) {
+    for(int i=0; i<101; i++) {
         malla[i][0] = sin(M_PI*i/100);
-        malla[i][1] = 0;
     }
     
-    while(t<tmax){
-        
+    while(t<tmax) {
         
         malla[0][1] = 0;
-        malla[99][2] = 0;
-        for(int i=1; i<99; i++) {
+        malla[100][2] = 0;
+        for(int i=1; i<100; i++) {
             malla[i][1] = malla[i][0] + 0.5*r*(malla[i+1][0]+malla[i-1][0]+2*malla[i][0]);
             malla[i][2] = 2*malla[i][1] - malla[i][0] + c1*(malla[i+1][1]+malla[i-1][1]+2*malla[i][1]);
-            malla[i][1] = 0;
         }
         for(int i=0; i<100; i++) {
+            outfile << malla[i][0] << " ";
             malla[i][0] = malla[i][1];
-            malla[i][1] = malla[i][2]
+            malla[i][1] = malla[i][2];
         }
-        
+        outfile << endl;
         t+=dt;
-        
     }
-    
-    
-    
-    
     outfile.close();
     
 }
